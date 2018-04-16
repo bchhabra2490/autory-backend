@@ -128,7 +128,7 @@ exports.updateDuration = function (req,res) {
         if(err || !connection){
             return res.status(status.success.response_code).json({"status":false,"data": err})
         }else {
-            connection.query(`Update machines set duration=${req.body.duration} where machineId=${req.body.machineId} and factoryId = ${req.body.factoryId}`, function(error,results,fields){
+            connection.query(`Update machines set duration=${req.body.duration} where machineId=${req.body.machineId} and factoryId = ${req.body.factoryId} and duration = ${null}`, function(error,results,fields){
                 connection.release();
                 if(error){ return res.status(status.success.response_code).json({"status":false,"data": error})}
                 else{
