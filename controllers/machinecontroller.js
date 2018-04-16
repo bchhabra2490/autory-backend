@@ -3,6 +3,9 @@ var pool = require('../globals').db;
 
 
 exports.postMachineData = function (req,res) {
+    
+    console.log(req.body);
+    
     const machineId = req.body.machineId;
     var timeStopped = req.body.time || new Date();
     timeStopped = timeStopped.toISOString().slice(0, 19).replace('T', ' ').toString();
@@ -124,6 +127,9 @@ exports.updateReason = function (req,res) {
 };
 
 exports.updateDuration = function (req,res) {
+    
+    console.log(req.body);
+    
     const machineId = req.body.machineId;
     const duration = req.body.duration;
     const factoryId = req.body.factoryId || 1;
