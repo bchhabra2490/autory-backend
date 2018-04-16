@@ -124,11 +124,16 @@ exports.updateReason = function (req,res) {
 };
 
 exports.updateDuration = function (req,res) {
+
+    const machineId = req.body.machineId;
+    var duration = req.body.duration;
+    const factoryId = req.body.factoryId || 1;
+
     pool.getConnection(function(err,connection){
         if(err || !connection){
             return res.status(status.success.response_code).json({"status":false,"data": err})
         }else {
-            connection.query(`Update machines set duration=${req.body.duration} where machineId=${req.body.machineId} and factoryId = ${req.body.factoryId} and duration = ${null}`, function(error,results,fields){
+            connection.query(`Update machines set duration=${duration} where machineId=${machineId} and factoryId = ${factoryId} and duration = ${null}`, function(error,results,fields){
                 connection.release();
                 if(error){ return res.status(status.success.response_code).json({"status":false,"data": error})}
                 else{
