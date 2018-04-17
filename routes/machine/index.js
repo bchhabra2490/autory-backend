@@ -18,7 +18,7 @@ router.get('/:factoryId/:machineId',function(req,res){
     machine_controller.getMachineData(req,res);
 });
 
-router.patch('/notifs/:id',function (req,res) {
+router.post('/notifs/:id',function (req,res) {
     machine_controller.updateNotification(req,res);
 });
 
@@ -26,7 +26,7 @@ router.post('/duration',function (req,res) {
     machine_controller.updateDuration(req,res);
 });
 
-router.patch('/reason/:id',function (req,res) {
+router.post('/reason/:id',function (req,res) {
     machine_controller.updateReason(req,res);
 });
 
