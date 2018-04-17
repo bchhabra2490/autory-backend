@@ -26,7 +26,7 @@ router.post('/duration',function (req,res) {
     machine_controller.updateDuration(req,res);
 });
 
-router.post('/reason/:id',function (req,res) {
+router.post('/reason',function (req,res) {
     machine_controller.updateReason(req,res);
 });
 
