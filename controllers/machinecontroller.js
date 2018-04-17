@@ -86,6 +86,7 @@ exports.getNotifications = function (req,res) {
 
 
 exports.updateReason = function (req,res) {
+    console.log(req.body);
     pool.getConnection(function(err,connection){
         if(err || !connection){
             return res.status(status.success.response_code).json({"status":false,"data": err})
@@ -98,6 +99,7 @@ exports.updateReason = function (req,res) {
                     else {
                         connection.query(`Update notifications set seen=${1} where id=${req.body.notifId}`, function (nerr, nres) {
                             connection.release();
+                            console.log(nres);
                             return res.status(status.success.response_code).json({"status": true, "data": results});
                         });
                     }
