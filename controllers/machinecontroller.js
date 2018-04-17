@@ -91,12 +91,12 @@ exports.updateReason = function (req,res) {
             return res.status(status.success.response_code).json({"status":false,"data": err})
         }else {
             if(req.body.reason!==0) {
-                connection.query(`Update machines set reason=${req.body.reason} where id=${req.params.id}`, function (error, results, fields) {
+                connection.query(`Update machines set reason=${req.body.reason} where id=${req.body.id}`, function (error, results, fields) {
                     if (error) {
                         return res.status(status.success.response_code).json({"status": false, "data": error})
                     }
                     else {
-                        connection.query(`Update notifications set seen=${1} where id=${req.body.r}`, function (nerr, nres) {
+                        connection.query(`Update notifications set seen=${1} where id=${req.body.notifId}`, function (nerr, nres) {
                             connection.release();
                             return res.status(status.success.response_code).json({"status": true, "data": results});
                         });
@@ -108,7 +108,7 @@ exports.updateReason = function (req,res) {
                         return res.status(status.success.response_code).json({"status": false, "data": rerr})
                     }else{
                         console.log(rres);
-                        connection.query(`Update machines set reason=${rres.insertId} where id=${req.params.id}`, function (error, results, fields) {
+                        connection.query(`Update machines set reason=${rres.insertId} where id=${req.body.id}`, function (error, results, fields) {
                             if (error) {
                                 return res.status(status.success.response_code).json({"status": false, "data": error})
                             }
