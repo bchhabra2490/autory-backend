@@ -3,6 +3,9 @@ var pool = require('../globals').db;
 var Json2csvParser = require('json2csv').Parser;
 
 exports.postMachineData = function (req,res) {
+
+    console.log(req.body);
+
     const machineId = req.body.machineId;
     var timeStopped = req.body.time || new Date();
 
@@ -92,6 +95,7 @@ exports.getNotifications = function (req,res) {
 
 
 exports.updateReason = function (req,res) {
+    console.log(req.body);
     pool.getConnection(function(err,connection){
         if(err || !connection){
             return res.status(status.success.response_code).json({"status":false,"data": err})
@@ -104,6 +108,7 @@ exports.updateReason = function (req,res) {
                     else {
                         connection.query(`Update notifications set seen=${1} where id=${req.body.notifId}`, function (nerr, nres) {
                             connection.release();
+                            console.log(nres);
                             return res.status(status.success.response_code).json({"status": true, "data": results});
                         });
                     }
@@ -134,16 +139,18 @@ exports.updateReason = function (req,res) {
 
 exports.updateDuration = function (req,res) {
 
+
+    console.log(req.body);
+
     const machineId = req.body.machineId;
-    var duration = req.body.duration;
+    const duration = req.body.duration;
     const factoryId = req.body.factoryId || 1;
-
-
     pool.getConnection(function(err,connection){
         if(err || !connection){
             return res.status(status.success.response_code).json({"status":false,"data": err})
         }else {
             connection.query(`Update machines set duration=${duration} where machineId=${machineId} and factoryId = ${factoryId} and duration IS NULL`, function(error,results,fields){
+
                 connection.release();
                 if(error){ return res.status(status.success.response_code).json({"status":false,"data": error})}
                 else{
