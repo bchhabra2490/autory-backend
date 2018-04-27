@@ -10,6 +10,11 @@ router.get('/reasons',function (req,res) {
     machine_controller.getReasons(req,res);
 });
 
+
+router.get('/getcsv',function (req,res) {
+    machine_controller.getCsv(req,res);
+});
+
 router.get('/notifs/:user_id',function (req,res) {
     machine_controller.getNotifications(req,res);
 });
