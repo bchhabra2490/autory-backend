@@ -124,7 +124,7 @@ exports.updateReason = function (req,res) {
                                 return res.status(status.success.response_code).json({"status": false, "data": error})
                             }
                             else {
-                                connection.query(`Update notifications set seen=${1} where id=${req.body.notifId}`, function (nerr, nres) {
+                                connection.query(`Update notifications set seen=${1} where nid=${req.body.notifId}`, function (nerr, nres) {
                                     connection.release();
                                     return res.status(status.success.response_code).json({"status": true, "data": results});
                                 });
