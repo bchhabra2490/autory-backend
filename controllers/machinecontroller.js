@@ -82,7 +82,7 @@ exports.getNotifications = function (req,res) {
         if(err || !connection){
             return res.status(status.success.response_code).json({"status":false,"data": err})
         }else {
-            connection.query(`Select * from notifications as n Inner Join machines as m On m.id = n.machine_id where user_id = ${user_id} and seen=${0}`, function(error,results,fields){
+            connection.query(`Select * from notifications as n Right Join machines as m On m.id = n.machine_id where user_id = ${user_id} and seen=${0}`, function(error,results,fields){
                 connection.release();
                 if(error){ return res.status(status.success.response_code).json({"status":false,"data": error})}
                 else{
